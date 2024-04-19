@@ -5,6 +5,7 @@ import BarPlayer from "@/components/barplayer/BarPlayer";
 import Sidebar from "@/components/sidebar/Sidebar";
 import SearchFilter from "@/components/filter/SearchFilter";
 import PlaylistItem from "@/components/playlistitem/PlaylistItem";
+import Playlist from "@/components/playlist/Playlist";
 
 export default function Home() {
   return (
@@ -16,21 +17,7 @@ export default function Home() {
             <Search />
             <h2 className={styles.centerblockTitle}>Треки</h2>
             <SearchFilter />
-            <div className={styles.centerblockContent}>
-              <div className={styles.contentTitle}>
-                <div className={styles.playlistTitle1}>Трек</div>
-                <div className={styles.playlistTitle2}>Исполнитель</div>
-                <div className={styles.playlistTitle3}>Альбом</div>
-                <div className={styles.playlistTitle4}>
-                  <svg className={styles.playlistTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
-                  </svg>
-                </div>
-              </div>
-              <div className={styles.contentPlayllist}>
-                <PlaylistItem />
-              </div>
-            </div>
+            <Playlist />
           </div>
           <Sidebar />
         </main>
