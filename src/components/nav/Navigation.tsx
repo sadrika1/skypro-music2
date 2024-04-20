@@ -38,8 +38,8 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menuItem}>
-              <Link href="#" className={styles.menuLink}>
-                Войти
+              <Link href="/signin" className={styles.menuLink}>
+                Выйти
               </Link>
             </li>
           </ul>

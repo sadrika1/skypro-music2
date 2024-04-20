@@ -8,9 +8,11 @@ export default function Sidebar() {
       <div className={styles.sidebarPersonal}>
         <p className={styles.sidebarPersonalName}>Sergey.Ivanov</p>
         <div className={styles.sidebarIcon}>
-          <svg>
-            <use xlinkHref="img/icon/sprite.svg#logout"></use>
-          </svg>
+          <Link href="/signin">
+            <svg>
+              <use xlinkHref="img/icon/sprite.svg#logout"></use>
+            </svg>
+          </Link>
         </div>
       </div>
       <div className={styles.sidebarBlock}>

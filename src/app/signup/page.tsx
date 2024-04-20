@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-export default function SignInPage() {
+export default function SignUnPage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.containerEnter}>
@@ -30,12 +30,18 @@ export default function SignInPage() {
               name="password"
               placeholder="Пароль"
             />
-            <button className={styles.modalBtnEnter}>
-              <Link href="/">Войти</Link>
-            </button>
+            <input
+              className={styles.modalInput}
+              type="password"
+              name="password"
+              placeholder="Повторите пароль"
+            />
             <button className={styles.modalBtnSignup}>
               <Link href="/signup">Зарегистрироваться</Link>
             </button>
+            <div className={styles.textSignIn}>
+              Уже зарегистрированы? <Link href="/signin">Войти здесь</Link>
+            </div>
           </form>
         </div>
       </div>
