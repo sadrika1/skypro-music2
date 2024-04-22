@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import styles from "./searchFilter.module.css";
 
 type FilterItmeType = {
@@ -14,9 +15,9 @@ export default function FilterItem({
   isOpen,
 }: FilterItmeType) {
   return (
-    <>
+    <div className={styles.filtersContainer}>
       <div
-        className={styles.filterButton}
+        className={classNames(styles.filterButton, { [styles.active]: isOpen })}
         onClick={() => handleFilterClick(title)}
       >
         {title}
@@ -32,6 +33,6 @@ export default function FilterItem({
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -2,6 +2,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -10,6 +11,10 @@
     -ms-flex-align: center;
     align-items: center;
     margin-bottom: 51px;
+}
+
+.filtersContainer {
+    position: relative;
 }
 
 .filterTitle {
@@ -29,15 +34,18 @@
     border-radius: 60px;
     padding: 6px 20px;
     position: relative;
-}
-
-.filterButton:not(:last-child) {
     margin-right: 10px;
 }
 
 .filterButton:hover {
     border-color: #d9b6ff;
     color: #d9b6ff;
+    cursor: pointer;
+}
+
+.active {
+    border-color: #AD61FF;
+    color: #AD61FF;
     cursor: pointer;
 }
 
@@ -51,16 +59,16 @@
     flex-direction: column;
     background-color: #313131;
     border-radius: 15px;
-    top: 300px;
-    left: 350px;
+    margin-top: 15px;
+    margin-left: -15px;
 }
 
 .dropdownItem {
-    margin: 10px;
-    padding: 8px;
+    padding: 10px 10px;
     cursor: pointer;
     transition: all 0.3s;
     list-style-type: none;
+
 }
 
 .dropdownItem:hover {

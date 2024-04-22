@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 type ErrorType = {
-    error: any; 
+    error: Error; 
     reset: () => void; 
   };
 

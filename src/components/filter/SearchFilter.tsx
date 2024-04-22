@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import FilterItem from "./FilterItem";
 import styles from "./searchFilter.module.css";
@@ -6,20 +6,21 @@ import styles from "./searchFilter.module.css";
 const filters = [
   {
     title: "Исполнитель",
-    list: ['kek', 'cheburek'],
+    list: ["kek", "cheburek"],
   },
   {
     title: "Год выпуска",
-    list: ['2007', '2011'],
+    list: ["2007", "2011"],
   },
   {
     title: "Жанр",
-    list: ['rock', 'pop'],
+    list: ["rock", "pop"],
   },
 ];
 
 export default function SearchFilter() {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+
   const handleFilterClick = (newFilter: string) => {
     setActiveFilter((prev) => (prev === newFilter ? null : newFilter));
   };
