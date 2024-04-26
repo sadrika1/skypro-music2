@@ -4,7 +4,6 @@ import Search from "@/components/search/Search";
 import BarPlayer from "@/components/barplayer/BarPlayer";
 import Sidebar from "@/components/sidebar/Sidebar";
 import SearchFilter from "@/components/filter/SearchFilter";
-import PlaylistItem from "@/components/playlistitem/PlaylistItem";
 import Playlist from "@/components/playlist/Playlist";
 
 export default function Home() {

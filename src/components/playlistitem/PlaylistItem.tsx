@@ -1,21 +1,27 @@
-import Link from "next/link";
+"use client";
+
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import styles from "./playlistitem.module.css";
+import { trackType } from "@/types";
+import { setCurrentTrack } from "@/store/features/playlistSlice";
 
 type PlaylistItemType = {
-  name: string;
-  author: string;
-  album: string;
-  duration_in_seconds: number;
+  track: trackType;
+  tracksData: trackType[];
 };
 
-export default function PlaylistItem({
-  name,
-  author,
-  album,
-  duration_in_seconds,
-}: PlaylistItemType) {
+export default function PlaylistItem({ track, tracksData }: PlaylistItemType) {
+  const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+  const { name, author, album, duration_in_seconds, id } = track;
+  const isPlaying = currentTrack ? currentTrack.id === id : false; // для инициализации играющего трека в плейлисте 
+
+  const dispatch = useAppDispatch();
+  const handleTrackClick = () => {
+    dispatch(setCurrentTrack({ track, tracksData }));
+  };
+
   return (
-    <div className={styles.playlistItem}>
+    <div onClick={handleTrackClick} className={styles.playlistItem}>
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
@@ -24,20 +30,16 @@ export default function PlaylistItem({
             </svg>
           </div>
           <div className="track__title-text">
-            <Link className={styles.trackTitleLink} href="#">
+            <span className={styles.trackTitleLink}>
               {name} <span className={styles.trackTitleSpan}></span>
-            </Link>
+            </span>
           </div>
         </div>
         <div className={styles.trackAuthor}>
-          <Link className={styles.trackAuthorLink} href="#">
-            {author}
-          </Link>
+          <span className={styles.trackAuthorLink}>{author}</span>
         </div>
         <div className={styles.trackAlbum}>
-          <Link className={styles.trackAlbumLink} href="#">
-            {album}
-          </Link>
+          <span className={styles.trackAlbumLink}>{album}</span>
         </div>
         <div className="track__time">
           <svg className={styles.trackTimeSvg}>

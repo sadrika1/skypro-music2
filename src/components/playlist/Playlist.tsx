@@ -3,14 +3,14 @@ import styles from "./Playlist.module.css";
 import { getAllTracks } from "@/api/tracks";
 import { trackType } from "@/types";
 
+
 export default async function Playlist() {
   let tracksData: trackType[];
   try {
     tracksData = await getAllTracks();
-  } catch (error : any) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
-
   return (
     <div className={styles.centerblockContent}>
       <div className={styles.contentTitle}>
@@ -26,10 +26,8 @@ export default async function Playlist() {
       <div className={styles.contentPlayllist}>
         {tracksData.map((track) => (
           <PlaylistItem
-            name={track.name}
-            album={track.album}
-            author={track.author}
-            duration_in_seconds={track.duration_in_seconds}
+           track={track}
+           tracksData={tracksData}
           />
         ))}
       </div>

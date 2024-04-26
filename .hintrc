@@ -11,6 +11,12 @@
           "-ms-grid-row-span"
         ]
       }
+    ],
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
     ]
   },
   "browserslist": [
