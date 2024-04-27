@@ -24,6 +24,7 @@ export default function BarPlayer() {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [volume, setVolume] = useState<number>(30);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
   const duration = audioRef.current?.duration;
 
@@ -56,21 +57,52 @@ export default function BarPlayer() {
   };
 
   const handleVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
-   if (audioRef.current) {
-    setVolume(Number(e.target.value));
-    audioRef.current.volume = Number(e.target.value) / 100}
-  }
+    if (audioRef.current) {
+      setVolume(Number(e.target.value));
+      audioRef.current.volume = Number(e.target.value) / 100;
+    }
+  };
+
+ 
+
+  // const handleEnded = () => {
+  //     // Проверяем, не является ли текущий трек последним в плейлисте
+  //     if (currentTrackIndex < playlist.length - 1) {
+  //         // Переход к следующему треку
+  //         setCurrentTrackIndex(currentTrackIndex + 1);
+  //     } else {
+  //         // Или начинаем плейлист с начала
+  //         setCurrentTrackIndex(0);
+  //     }
+  // };
+
+  // // Устанавливаем источник аудио и обработчик события `ended` при изменении трека
+  // useEffect(() => {
+  //     const audio = audioRef.current;
+  //     audio.src = playlist[currentTrackIndex].url;
+  //     audio.addEventListener('ended', handleEnded);
+
+  //     // Воспроизводим новый трек
+  //     audio.play();
+
+  //     return () => {
+  //         audio.removeEventListener('ended', handleEnded);
+  //     };
+  // }, [currentTrackIndex, playlist]);
 
   return (
     <>
       {currentTrack && (
         <div className={styles.bar}>
+          <div> {currentTime}</div>
+          <div>{duration}</div>
           <div className={styles.barContent}>
             <audio
-              autoPlay
+              // autoPlay
               ref={audioRef}
               src={currentTrack.track_file}
               loop={isLoop}
+              onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
             ></audio>
             <ProgressBar
               max={duration}
@@ -175,12 +207,12 @@ export default function BarPlayer() {
                     </svg>
                   </div>
                   <div className={styles.volumeProgress}>
-                    <VolumeRange 
-                        min={0}
-                        max={100}
-                        value={volume}
-                        step={0.01}
-                        onChange={handleVolumeChange}
+                    <VolumeRange
+                      min={0}
+                      max={100}
+                      value={volume}
+                      step={0.01}
+                      onChange={handleVolumeChange}
                     />
                   </div>
                 </div>

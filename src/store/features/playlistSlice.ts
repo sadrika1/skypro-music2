@@ -30,7 +30,6 @@ const playlistSlice = createSlice({
       );
     },
     setNextTrack: (state) => {
-      //dispatch на кнопку
       const playlist = state.isShuffle
         ? state.shuffledPlaylist
         : state.playlist;

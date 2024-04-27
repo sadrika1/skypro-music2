@@ -13,7 +13,7 @@ type PlaylistItemType = {
 export default function PlaylistItem({ track, tracksData }: PlaylistItemType) {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const { name, author, album, duration_in_seconds, id } = track;
-  const isPlaying = currentTrack ? currentTrack.id === id : false; // для инициализации играющего трека в плейлисте 
+  const isPlaying = currentTrack ? currentTrack.id === id : false; // для инициализации играющего трека в плейлисте
 
   const dispatch = useAppDispatch();
   const handleTrackClick = () => {
@@ -25,9 +25,13 @@ export default function PlaylistItem({ track, tracksData }: PlaylistItemType) {
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
-            <svg className={styles.trackTitleSvg}>
-              <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-            </svg>
+            {isPlaying ? (
+              <div className={styles.pulseCircle}></div>
+            ) : (
+              <svg className={styles.trackTitleSvg}>
+                <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+              </svg>
+            )}
           </div>
           <div className="track__title-text">
             <span className={styles.trackTitleLink}>
