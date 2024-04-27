@@ -3,17 +3,19 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 // import PlayerControls from "./PlayerControls";
 import styles from "./barplayer.module.css";
-import { trackType } from "@/types";
 import ProgressBar from "./progressbar/ProgressBar";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
-  setIsShuffle,
   setNextTrack,
   setPrevtrack,
+  toggleShuffle,
 } from "@/store/features/playlistSlice";
+import VolumeRange from "./volume/VolumeRange";
 
 export default function BarPlayer() {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+  const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
+
   const dispatch = useAppDispatch();
 
   const [isLoop, setIsLoop] = useState<boolean>(false);
@@ -21,6 +23,7 @@ export default function BarPlayer() {
   const audioRef = useRef<null | HTMLAudioElement>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [volume, setVolume] = useState<number>(30);
 
   const duration = audioRef.current?.duration;
 
@@ -51,6 +54,12 @@ export default function BarPlayer() {
   const toggleLoop = () => {
     setIsLoop((repeat) => !repeat);
   };
+
+  const handleVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
+   if (audioRef.current) {
+    setVolume(Number(e.target.value));
+    audioRef.current.volume = Number(e.target.value) / 100}
+  }
 
   return (
     <>
@@ -112,10 +121,14 @@ export default function BarPlayer() {
                   </div>
                   <div
                     className={styles.playerBtnShuffle}
-                    // onClick={() => dispatch(setIsShuffle(true))}
+                    onClick={() => dispatch(toggleShuffle())}
                   >
                     <svg className={styles.playerBtnShuffleSvg}>
-                      <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+                      <use
+                        xlinkHref={`img/icon/sprite.svg#${
+                          isShuffle ? "icon-shuffle-active" : "icon-shuffle"
+                        }`}
+                      ></use>
                     </svg>
                   </div>
                 </div>
@@ -161,8 +174,14 @@ export default function BarPlayer() {
                       <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
                     </svg>
                   </div>
-                  <div className="volume__progress _btn">
-                    <input type="range" />
+                  <div className={styles.volumeProgress}>
+                    <VolumeRange 
+                        min={0}
+                        max={100}
+                        value={volume}
+                        step={0.01}
+                        onChange={handleVolumeChange}
+                    />
                   </div>
                 </div>
               </div>

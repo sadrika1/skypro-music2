@@ -302,3 +302,8 @@
     fill: transparent;
     stroke: #696969;
 }
+
+.volumeProgress {
+    width: 109px;
+    height: 29px;
+}

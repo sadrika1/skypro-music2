@@ -57,9 +57,12 @@ const playlistSlice = createSlice({
     setIsShuffle: (state, action: PayloadAction<boolean>) => {
       state.isShuffle = action.payload;
     },
+    toggleShuffle: (state) => {
+      state.isShuffle = !state.isShuffle;
+    },
   },
 });
 
-export const { setCurrentTrack, setNextTrack, setIsShuffle, setPrevtrack } =
+export const { setCurrentTrack, setNextTrack, setIsShuffle, setPrevtrack, toggleShuffle } =
   playlistSlice.actions;
 export const playlistReducer = playlistSlice.reducer;
