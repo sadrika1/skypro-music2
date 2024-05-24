@@ -64,6 +64,14 @@
     width: 500px;
 }
 
+.timeFormat {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    font-size: 18px;
+    color: #7b7a7a;
+}
+
 .trackPlayContain {
     width: auto;
     display: -ms-grid;

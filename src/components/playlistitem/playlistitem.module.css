@@ -126,10 +126,10 @@
 
 .pulseCircle {
   width: 150px;
-  height: 20px;
+  height: 17px;
   border-radius: 50%;
   border: none;
-  background-color: tomato;
+
   display: inline-block;
   color: #222222;
   font-family: sans-serif;
@@ -141,6 +141,27 @@
   cursor: pointer;
   transition: all .2s;
   animation: shadow .9s infinite linear;
+  background-color: #b672ff;
+  color: #fff;
+}
+
+.pulseCircleStop {
+  width: 70px;
+  height: 15px;
+  border-radius: 50%;
+  border: none;
+
+  display: inline-block;
+  color: #222222;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 1.68px;
+  cursor: pointer;
+  transition: all .2s;
+ 
   background-color: #b672ff;
   color: #fff;
 }

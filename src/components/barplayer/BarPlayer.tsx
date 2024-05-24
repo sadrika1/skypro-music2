@@ -9,22 +9,24 @@ import {
   setNextTrack,
   setPrevtrack,
   toggleShuffle,
+  toggleIsPlaying,
 } from "@/store/features/playlistSlice";
 import VolumeRange from "./volume/VolumeRange";
 
 export default function BarPlayer() {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
+  const { isPlaying } = useAppSelector((store) => store.playlist);
+  const playlist = useAppSelector((state) => state.playlist.playlist);
 
   const dispatch = useAppDispatch();
 
-  const [isLoop, setIsLoop] = useState<boolean>(false);
-
   const audioRef = useRef<null | HTMLAudioElement>(null);
+
+  const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [volume, setVolume] = useState<number>(30);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
 
   const duration = audioRef.current?.duration;
 
@@ -35,9 +37,18 @@ export default function BarPlayer() {
       } else {
         audioRef.current.play();
       }
-      setIsPlaying((prev) => !prev);
+      dispatch(toggleIsPlaying(!isPlaying));
     }
   };
+  useEffect(() => {
+    if (audioRef.current) {
+      if (!isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+    }
+  }, [isPlaying, currentTrack]);
 
   const handleSeek = (event: ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
@@ -63,49 +74,41 @@ export default function BarPlayer() {
     }
   };
 
- 
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio?.addEventListener("ended", () => {
+      dispatch(setNextTrack());
+    });
 
-  // const handleEnded = () => {
-  //     // Проверяем, не является ли текущий трек последним в плейлисте
-  //     if (currentTrackIndex < playlist.length - 1) {
-  //         // Переход к следующему треку
-  //         setCurrentTrackIndex(currentTrackIndex + 1);
-  //     } else {
-  //         // Или начинаем плейлист с начала
-  //         setCurrentTrackIndex(0);
-  //     }
-  // };
+    audio?.play();
+  }, [audioRef.current, dispatch]);
 
-  // // Устанавливаем источник аудио и обработчик события `ended` при изменении трека
-  // useEffect(() => {
-  //     const audio = audioRef.current;
-  //     audio.src = playlist[currentTrackIndex].url;
-  //     audio.addEventListener('ended', handleEnded);
-
-  //     // Воспроизводим новый трек
-  //     audio.play();
-
-  //     return () => {
-  //         audio.removeEventListener('ended', handleEnded);
-  //     };
-  // }, [currentTrackIndex, playlist]);
+  function FormatSeconds(inputSec: number | undefined) {
+    if (inputSec) {
+      let minutes: number = Math.floor(inputSec / 60);
+      let seconds = Math.floor(inputSec) - minutes * 60;
+      return `${minutes}:${seconds > 9 ? "" : "0"}${seconds} `;
+    }
+  }
 
   return (
     <>
       {currentTrack && (
         <div className={styles.bar}>
-          <div> {currentTime}</div>
-          <div>{duration}</div>
+          <div className={styles.timeFormat}>
+            <div>{FormatSeconds(currentTime)}</div>
+            <div> {FormatSeconds(duration)}</div>
+          </div>
+
           <div className={styles.barContent}>
             <audio
-              // autoPlay
               ref={audioRef}
               src={currentTrack.track_file}
               loop={isLoop}
               onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
             ></audio>
             <ProgressBar
-              max={duration}
+              max={duration || 0}
               value={currentTime}
               step={0.01}
               onChange={handleSeek}

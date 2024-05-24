@@ -3,7 +3,10 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import styles from "./playlistitem.module.css";
 import { trackType } from "@/types";
-import { setCurrentTrack } from "@/store/features/playlistSlice";
+import {
+  setCurrentTrack,
+  toggleIsPlaying,
+} from "@/store/features/playlistSlice";
 
 type PlaylistItemType = {
   track: trackType;
@@ -13,11 +16,12 @@ type PlaylistItemType = {
 export default function PlaylistItem({ track, tracksData }: PlaylistItemType) {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const { name, author, album, duration_in_seconds, id } = track;
-  const isPlaying = currentTrack ? currentTrack.id === id : false; // для инициализации играющего трека в плейлисте
+  const { isPlaying } = useAppSelector((store) => store.playlist);
 
   const dispatch = useAppDispatch();
   const handleTrackClick = () => {
     dispatch(setCurrentTrack({ track, tracksData }));
+    dispatch(toggleIsPlaying(true));
   };
 
   return (
@@ -25,13 +29,16 @@ export default function PlaylistItem({ track, tracksData }: PlaylistItemType) {
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
-            {isPlaying ? (
-              <div className={styles.pulseCircle}></div>
-            ) : (
-              <svg className={styles.trackTitleSvg}>
-                <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-              </svg>
+            {currentTrack?.id === track.id && (
+              <div
+                className={`${
+                  isPlaying ? styles.pulseCircle : styles.pulseCircleStop
+                }`}
+              ></div>
             )}
+            <svg className={styles.trackTitleSvg}>
+              <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+            </svg>
           </div>
           <div className="track__title-text">
             <span className={styles.trackTitleLink}>

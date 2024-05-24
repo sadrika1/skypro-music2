@@ -3,6 +3,9 @@
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 *:before,
