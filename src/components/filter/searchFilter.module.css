@@ -1,0 +1,77 @@
+.centerblockFilter {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 51px;
+}
+
+.filtersContainer {
+    position: relative;
+}
+
+.filterTitle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 15px;
+}
+
+.filterButton {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid #ffffff;
+    border-radius: 60px;
+    padding: 6px 20px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.filterButton:hover {
+    border-color: #d9b6ff;
+    color: #d9b6ff;
+    cursor: pointer;
+}
+
+.active {
+    border-color: #AD61FF;
+    color: #AD61FF;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    box-sizing: border-box;
+    width: 245px;
+    height: 305px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    background-color: #313131;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-left: -15px;
+}
+
+.dropdownItem {
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    list-style-type: none;
+
+}
+
+.dropdownItem:hover {
+    text-decoration: underline;
+    color: #B672FF;
+}
