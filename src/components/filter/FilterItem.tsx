@@ -1,9 +1,13 @@
 import classNames from "classnames";
 import styles from "./searchFilter.module.css";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { trackType } from "@/types";
+import { order } from "./data";
+import { setFilters } from "@/store/features/playlistSlice";
 
-type FilterItmeType = {
+type FilterItemType = {
   title: string;
-  list: string[];
+  value: "author" | "genre" | "order";
   handleFilterClick: (newFilter: string) => void;
   isOpen: boolean;
 };
@@ -11,9 +15,40 @@ type FilterItmeType = {
 export default function FilterItem({
   handleFilterClick,
   title,
-  list,
+  value,
   isOpen,
-}: FilterItmeType) {
+}: FilterItemType) {
+  const dispatch = useAppDispatch();
+  const tracksData = useAppSelector((state) => state.playlist.initialTracks);
+  const optionList = useAppSelector(
+    (state) => state.playlist.filterOptions[value]
+  );
+
+  const getFilterList = () => {
+    if (value !== "order") {
+      const array = new Set(
+        tracksData?.map((track: trackType) => track[value]) || []
+      );
+      return Array.from(array);
+    }
+    return order;
+  };
+  const toggleFilter = (item: string) => {
+    if (value === "order") {
+      dispatch(setFilters({ order: item }));
+      return;
+    }
+    dispatch(
+      setFilters({
+        [value]: optionList.includes(item)
+          ? (optionList as string[]).filter((el) => el !== item)
+          : [...(optionList as string[]), item],
+      })
+    );
+  };
+
+  getFilterList();
+
   return (
     <div className={styles.filtersContainer}>
       <div
@@ -25,8 +60,12 @@ export default function FilterItem({
       {isOpen && (
         <div className={styles.dropdown}>
           <ul>
-            {list.map((item) => (
-              <li key={item} className={styles.dropdownItem}>
+            {getFilterList().map((item) => (
+              <li
+                onClick={() => toggleFilter(item)}
+                className={styles.dropdownItem}
+                key={item}
+              >
                 {item}
               </li>
             ))}

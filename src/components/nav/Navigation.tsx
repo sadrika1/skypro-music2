@@ -19,7 +19,10 @@ export default function Navigation() {
           height={19}
         />
       </div>
-      <div className={styles.navBurger} onClick={() => setMenuActive(!menuActive)}>
+      <div
+        className={styles.navBurger}
+        onClick={() => setMenuActive(!menuActive)}
+      >
         <span className={styles.burgerLine}></span>
         <span className={styles.burgerLine}></span>
         <span className={styles.burgerLine}></span>
@@ -28,12 +31,12 @@ export default function Navigation() {
         <div className={styles.navMenu}>
           <ul className={styles.menuList}>
             <li className={styles.menuItem}>
-              <Link href="#" className={styles.menuLink}>
+              <Link href="/" className={styles.menuLink}>
                 Главное
               </Link>
             </li>
             <li className={styles.menuItem}>
-              <Link href="#" className={styles.menuLink}>
+              <Link href="/mytracklist" className={styles.menuLink}>
                 Мой плейлист
               </Link>
             </li>
