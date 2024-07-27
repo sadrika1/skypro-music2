@@ -1,42 +1,28 @@
-.wrapper {
+
+  
+  .wrapper {
     width: 100%;
     min-height: 100%;
     overflow: hidden;
-}
-
-.containerEnter {
+  }
+  
+  .containerEnter {
     max-width: 100%;
     height: 100vh;
     margin: 0 auto;
     position: relative;
     background-color: rgba(0, 0, 0, 0.85);
-}
-
-.modal__btn-enter:hover {
-    background-color: #3f007d;
-}
-
-.modal__btn-signup:hover {
-    background-color: #f4f5f6;
-}
-
-.modal__btn-enter:active {
-    background-color: #271a58;
-}
-
-.modal__btn-signup:active {
-    background-color: #d9d9d9;
-}
-
-.modalBlock {
+  }
+  
+  .modalBlock {
     position: absolute;
     z-index: 2;
     left: calc(50% - (366px / 2));
     top: calc(50% - (439px / 2));
     opacity: 1;
-}
+  }
 
-.modalFormLogin {
+  .modalFormLogin {
     width: 366px;
     height: 439px;
     background-color: #ffffff;
@@ -52,75 +38,72 @@
     -ms-flex-align: center;
     align-items: center;
     padding: 43px 47px 47px 40px;
-    gap: 15px;
-}
-
-.modalFormLogin input:first-child {
-    margin-bottom: 30px;
-}
-
-.modalLogo {
+  }
+  
+  .modalLogo {
     width: 140px;
     height: 21px;
     margin-bottom: 34px;
     background-color: transparent;
-}
-
-.modalLogo img {
+  }
+  
+  .modalLogo img {
     width: 140px;
     height: auto;
-}
-
-.modalInput {
+  }
+  
+  .modalInput {
     width: 100%;
-    outline: none;
-    border: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     border-bottom: 1px solid #d0cece;
     padding: 8px 1px;
-    font-size: 18px;
-}
-
-.modalInput::-webkit-input-placeholder {
+  }
+  
+  .modalInput::-webkit-input-placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #d0cece;
-}
-
-.modalInput:-ms-input-placeholder {
+  }
+  
+  .modalInput:-ms-input-placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #d0cece;
-}
-
-.modalInput::-ms-input-placeholder {
+  }
+  
+  .modalInput::-ms-input-placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #d0cece;
-}
-
-.modalInput::placeholder {
+  }
+  
+  .modalInput::placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #d0cece;
-}
-
-.modalBtnEnter {
+  }
+  
+  .modalBtnEnter {
     width: 278px;
     height: 52px;
     background-color: #580ea2;
     border-radius: 6px;
+    margin-top: 60px;
+    margin-bottom: 20px;
     border: none;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -131,10 +114,9 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin-top: 20px;
-}
-
-.modalBtnEnter a {
+  }
+  
+  .modalBtnEnter a {
     width: 100%;
     height: 100%;
     font-style: normal;
@@ -152,9 +134,9 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-}
-
-.modalBtnSignup {
+  }
+  
+  .modalBtnSignup {
     width: 278px;
     height: 52px;
     background-color: transparent;
@@ -175,9 +157,9 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-}
-
-.modalBtnSignup a {
+  }
+  
+  .modalBtnSignup a {
     width: 100%;
     height: 100%;
     font-style: normal;
@@ -195,4 +177,34 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+  }
+  
+  .login {
+    margin-bottom: 30px;
+  }
+  
+.password{
+
 }
+
+
+  .modalFormLogin input:first-child {
+    margin-bottom: 30px;
+  }
+
+  .modalBtnEnter:hover {
+    background-color: #3f007d;
+  }
+  
+  .modalBtnSignup:hover {
+    background-color: #f4f5f6;
+  }
+  
+  .modalBtnEnter:active {
+    background-color: #271a58;
+  }
+  
+  .modalBtnSignup:active {
+    background-color: #d9d9d9;
+  }
+  

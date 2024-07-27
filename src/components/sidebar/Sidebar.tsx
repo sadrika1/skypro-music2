@@ -1,57 +1,52 @@
+import { memo } from "react";
 import Link from "next/link";
-import styles from "./sidebar.module.css";
+import styles from "./Sidebar.module.css"
 import Image from "next/image";
+import User from "../User/User";
 
-export default function Sidebar() {
+function Sidebar() {
   return (
     <div className={styles.mainSidebar}>
-      <div className={styles.sidebarPersonal}>
-        <p className={styles.sidebarPersonalName}>Sergey.Ivanov</p>
-        <div className={styles.sidebarIcon}>
-          <Link href="/signin">
-            <svg>
-              <use xlinkHref="img/icon/sprite.svg#logout"></use>
-            </svg>
-          </Link>
-        </div>
-      </div>
+     <User/>
       <div className={styles.sidebarBlock}>
         <div className={styles.sidebarList}>
           <div className={styles.sidebarItem}>
-            <Link className={styles.sidebarLink} href="#">
+            <Link className={styles.sidebarLink} href="/tracks/category/1">
               <Image
+                width={250}
+                height={150}
                 className={styles.sidebarImg}
                 src="/img/playlist01.png"
-                alt="day's playlist"
-                width={300}
-                height={150}
+                alt="Плейлист дня"
               />
             </Link>
           </div>
           <div className={styles.sidebarItem}>
-            <Link className={styles.sidebarLink} href="#">
+            <Link className={styles.sidebarLink} href="/tracks/category/2">
               <Image
+                width={250}
+                height={150}
                 className={styles.sidebarImg}
                 src="/img/playlist02.png"
-                alt="day's playlist"
-                width={300}
-                height={170}
+                alt="100 танцевальных хитов"
               />
             </Link>
           </div>
           <div className={styles.sidebarItem}>
-            <Link className={styles.sidebarLink} href="#">
+            <Link className={styles.sidebarLink} href="/tracks/category/3">
               <Image
+                width={250}
+                height={150}
                 className={styles.sidebarImg}
                 src="/img/playlist03.png"
-                alt="day's playlist"
-                width={300}
-                height={170}
+                alt="Инди-заряд"
               />
             </Link>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default memo(Sidebar)

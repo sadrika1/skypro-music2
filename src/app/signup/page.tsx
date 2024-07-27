@@ -1,93 +1,86 @@
+
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { useUserContext } from "@/context/user";
-import { useState } from "react";
-import { signUp } from "@/api/user";
-
-export default function SignUnPage() {
-  const { login } = useUserContext();
-  const [signupData, setSignupData] = useState({
-    login: "",
-    password: "",
-    repeatPassword: "",
-  });
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target; // Извлекаем имя поля и его значение
-
-    setSignupData({
-      ...signupData, // Копируем текущие данные из состояния
-      [name]: value, // Обновляем нужное поле
-    });
-  };
+import classNames from "classnames"
+import { ChangeEvent, useState } from "react";
+import { signupApi } from "@/api/users";
+import { useAppDispatch } from "@/components/hooks";
+import {setToken, setUser} from "@/store/features/userSlice";
+import {getToken} from "@/api/tracks";
 
 
-  // const handleSignup = async (e: any) => {
-  //   e.preventDefault();
-  //   if (!signupData.login || !signupData.password || !signupData.name) {
-  //     setError("Заполните обязательные поля");
-  //     return;
-  //   }
-  //   try {
-  //     await fetchReg(signupData).then((data) => {
-  //       login(data.user);
-  //       console.log("Correct!", data);
-  //     });
-  //     navigate(appRoutes.HOME);
-  //   } catch (error) {
-  //     console.error("Ошибка регистрации:", error);
-  //     setError(error.message || "Неизвестная ошибка регистрации");
-  //   }
-  // };
+export default function SignUpPage() {
+    const dispatch = useAppDispatch()
+    const [loginData, setLoginData] = useState({
+        email: "",
+        password: "",
+        username: "",
+      });
 
-  // useEffect(() => {
-  //   setError(null);
-  // }, [registerData]);
 
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.containerEnter}>
-        <div className={styles.modalBlock}>
-          <form className={styles.modalFormLogin} action="#">
-            <Link href="/">
-              <div className={styles.modalLogo}>
-                <Image
-                  src="/img/logo_modal.png"
-                  alt="logo"
-                  width={113}
-                  height={17}
-                />
-              </div>
-            </Link>
-            <input
-              className={styles.modalInput}
-              type="text"
-              name="login"
-              placeholder="Почта"
-            />
-            <input
-              className={styles.modalInput}
-              type="password"
-              name="password"
-              placeholder="Пароль"
-            />
-            <input
-              className={styles.modalInput}
-              type="password"
-              name="password"
-              placeholder="Повторите пароль"
-            />
-            <button className={styles.modalBtnSignup}>
-              <Link href="/signup">Зарегистрироваться</Link>
-            </button>
-            <div className={styles.textSignIn}>
-              Уже зарегистрированы? <Link href="/signin">Войти здесь</Link>
+
+      const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setLoginData({
+          ...loginData,
+          [name]: value,
+        });
+      };
+
+
+      const handleRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        signupApi(loginData).then((data) => {
+            dispatch(setUser(data))
+
+            getToken(loginData).then(tokensData => {
+                dispatch(setToken(tokensData))
+            })
+        })
+      };
+
+
+    return (
+
+        <div className={styles.wrapper}>
+            <div className={styles.containerSignup}>
+                <div className={styles.modalBlock}>
+                    <form className={styles.modalFormLogin}>
+                        <Link href="/signup">
+                            <div className={styles.modalLogo}>
+                                <Image width={140} height={21}  src="/img/logo_modal.png" alt="logo" />
+                            </div>
+                        </Link>
+                        <input
+                            className={classNames(styles.modalInput, styles.login)}
+                            type="email"
+                            name="email"
+                            placeholder="Почта"
+                            onChange={handleInputChange}
+                        />
+                        <input
+                            className={styles.modalInput}
+                            type="password"
+                            name="password"
+                            placeholder="Пароль"
+                            onChange={handleInputChange}
+                        />
+                        <input
+                            className={styles.modalInput}
+                            type="text"
+                            name="username"
+                            placeholder="Имя пользователя"
+                            onChange={handleInputChange}
+                        />
+                        <button  onClick={handleRegister} className={styles.modalBtnSignupEnt}>
+                            <Link href="/">Зарегистрироваться</Link>
+                        </button>
+                    </form>
+                </div>
             </div>
-          </form>
         </div>
-      </div>
-    </div>
-  );
+    )
 }

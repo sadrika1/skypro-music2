@@ -1,7 +1,7 @@
-.centerBlockSearch {
+
+.centerblockSearch {
     width: 100%;
     border-bottom: 1px solid #4e4e4e;
-    margin-top: 20px;
     margin-bottom: 51px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -13,17 +13,22 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-}
+  }
+  
 
-.searchSvg {
+
+
+
+
+  .searchSvg {
     width: 17px;
     height: 17px;
     margin-right: 5px;
     stroke: #ffffff;
     fill: transparent;
-}
-
-.searchText {
+  }
+  
+  .searchText {
     -webkit-box-flex: 100;
     -ms-flex-positive: 100;
     flex-grow: 100;
@@ -35,41 +40,40 @@
     font-size: 16px;
     line-height: 24px;
     color: #ffffff;
-}
-
-.searchText::-webkit-input-placeholder {
+  }
+  
+  .searchText::-webkit-input-placeholder {
     background-color: transparent;
     color: #ffffff;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-}
-
-.searchText:-ms-input-placeholder {
+  }
+  
+  .searchText:-ms-input-placeholder {
     background-color: transparent;
     color: #ffffff;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-}
-
-.searchText::-ms-input-placeholder {
+  }
+  
+  .searchText::-ms-input-placeholder {
     background-color: transparent;
     color: #ffffff;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-}
-
-.searchText::placeholder {
+  }
+  
+  .searchText::placeholder {
     background-color: transparent;
     color: #ffffff;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    border: none;
-}
+  }

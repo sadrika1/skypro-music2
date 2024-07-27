@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { playlistReducer } from "./features/playlistSlice";
+import { playListReducer } from "./features/playListSlice";
+import { userReducer } from "./features/userSlice";
 
 
 // Функция makeStore создает и возвращает хранилище Redux с помощью функции configureStore.
@@ -7,7 +8,9 @@ export const makeStore = () => {
   return configureStore({
     // Мы передаем объект, в котором свойство reducer содержит корневой редюсер, объединяющий все редюсеры нашего приложения.
     reducer: combineReducers({
-      playlist: playlistReducer,
+      playlist: playListReducer,
+      user: userReducer,
+      //здесь были бы все редьюсоры!!!!auth:authReducer 
     }),
   });
 };
@@ -21,3 +24,4 @@ export type RootState = ReturnType<AppStore["getState"]>;
 // Тип AppDispatch представляет собой тип функции диспетчера, который возвращает функция dispatch хранилища Redux.
 export type AppDispatch = AppStore["dispatch"];
 
+// Хуки useAppDispatch, useAppSelector и useAppStore позволяют использовать функции useDispatch, useSelector и useStore из библиотеки react-redux с типизацией.
